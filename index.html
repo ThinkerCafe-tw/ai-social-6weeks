@@ -99,6 +99,41 @@
             border-bottom: none;
         }
 
+        /* 週間陪伴區塊 */
+        .companion-box {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f9f9f9;
+            border-left: 4px solid #333;
+            border-radius: 8px;
+        }
+
+        .companion-box h3 {
+            font-size: 13pt;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .companion-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .companion-box li {
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .companion-box li:before {
+            content: "→";
+            position: absolute;
+            left: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
         /* 週次卡片 */
         .week-section {
             margin: 40px 0;
@@ -456,11 +491,11 @@
                                 </tr>
                                 <tr>
                                     <th>上課時間</th>
-                                    <td>每週一、三晚上 8:30-10:00（每次 1-1.5 小時，共六週）</td>
+                                    <td>每週一、三晚上 8:30-9:30（每次 1 小時，共六週）</td>
                                 </tr>
                                 <tr>
                                     <th>上課方式</th>
-                                    <td>線上一對一教學 + 週間 LINE 持續互動</td>
+                                    <td>線上一對一教學 + 週間持續陪伴與任務追蹤</td>
                                 </tr>
                                 <tr>
                                     <th>課程費用</th>
@@ -468,6 +503,17 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </section>
+
+                    <section className="companion-box">
+                        <h3>週間陪伴機制：不只上課，更是帶著你成長</h3>
+                        <ul>
+                            <li>每天檢查學習進度和作業完成狀況</li>
+                            <li>給予具體回饋和改進建議</li>
+                            <li>追蹤實際發文和數據表現</li>
+                            <li>即時解答遇到的問題</li>
+                            <li>見證你從混亂到系統化的改變過程</li>
+                        </ul>
                     </section>
 
                     <WeekSection 
