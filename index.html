@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>AI 自媒體系統建立課程 - 六週陪跑計畫</title>
+    
+    <!-- React & Babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- React Icons -->
+    <script src="https://unpkg.com/react-icons@5.0.1/index.esm.js" type="module"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Noto Serif TC', serif;
+            line-height: 1.8;
+            color: #000 !important;
+            background: #fff !important;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+        }
+
+        /* 強制淺色模式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #000 !important;
+                background: #fff !important;
+            }
+            
+            * {
+                color: inherit !important;
+            }
+        }
+
+        /* 標題區 */
+        header {
+            text-align: center;
+            border-bottom: 3px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .meta {
+            font-size: 11pt;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        /* 課程資訊 */
+        .course-info {
+            margin: 30px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .course-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .course-info th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            width: 25%;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .course-info td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .course-info tr:last-child td,
+        .course-info tr:last-child th {
+            border-bottom: none;
+        }
+
+        /* 週次卡片 */
+        .week-section {
+            margin: 40px 0;
+            border: 2px solid #333;
+            border-radius: 12px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .week-header {
+            background: #333;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .week-header h2 {
+            font-size: 16pt;
+            margin: 0;
+        }
+
+        .week-icon {
+            font-size: 24px;
+        }
+
+        .week-content {
+            padding: 20px;
+        }
+
+        .week-goal {
+            background: #f9f9f9;
+            border-left: 4px solid #666;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .week-goal h3 {
+            font-size: 12pt;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .learn-list, .complete-list {
+            margin: 20px 0;
+        }
+
+        .learn-list h3, .complete-list h3 {
+            font-size: 12pt;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .learn-list ul, .complete-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .learn-list li, .complete-list li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .learn-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 10px;
+            color: #666;
+        }
+
+        .complete-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 10px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* 最終成果區塊 */
+        .outcomes {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border: 2px solid #333;
+        }
+
+        .outcomes h2 {
+            font-size: 16pt;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .outcome-item {
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            display: flex;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .outcome-icon {
+            font-size: 24px;
+            color: #28a745;
+            flex-shrink: 0;
+        }
+
+        .outcome-text {
+            flex: 1;
+        }
+
+        .outcome-text strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* 包含內容 */
+        .includes {
+            margin: 40px 0;
+            padding: 30px;
+            border: 2px solid #333;
+            border-radius: 12px;
+        }
+
+        .includes h2 {
+            font-size: 16pt;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .includes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .include-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .include-icon {
+            font-size: 20px;
+            color: #333;
+        }
+
+        /* 下一步 */
+        .next-steps {
+            margin: 40px 0;
+            padding: 30px;
+            background: #fff;
+            border: 2px solid #333;
+            border-radius: 12px;
+        }
+
+        .next-steps h2 {
+            font-size: 16pt;
+            margin-bottom: 20px;
+        }
+
+        .next-steps ol {
+            padding-left: 30px;
+        }
+
+        .next-steps li {
+            padding: 8px 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #333;
+            text-align: center;
+            color: #666;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 響應式設計 */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10mm;
+            }
+
+            h1 {
+                font-size: 20pt;
+            }
+
+            .outcome-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .includes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 列印樣式 */
+        @media print {
+            body {
+                max-width: 100%;
+            }
+
+            .week-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // 圖標組件 (使用 Unicode 符號替代，因為 React Icons CDN 在這個環境中較難使用)
+        const Icons = {
+            Target: () => <span className="week-icon">🎯</span>,
+            Lightbulb: () => <span className="week-icon">💡</span>,
+            Calendar: () => <span className="week-icon">📅</span>,
+            TrendingUp: () => <span className="week-icon">📈</span>,
+            Zap: () => <span className="week-icon">⚡</span>,
+            Award: () => <span className="week-icon">🏆</span>,
+            CheckCircle: () => <span className="outcome-icon">✓</span>,
+            Package: () => <span className="include-icon">📦</span>,
+            Mail: () => <span>📧</span>,
+            MessageCircle: () => <span>💬</span>,
+        };
+
+        function App() {
+            return (
+                <div>
+                    <header>
+                        <h1>AI 自媒體系統建立課程</h1>
+                        <div className="subtitle">專屬於沛綺的六週陪跑計畫</div>
+                        <div className="meta">
+                            ThinkerCafe × Cruz Tang<br/>
+                            一對一線上教學｜2024
+                        </div>
+                    </header>
+
+                    <section className="course-info">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>課程目標</th>
+                                    <td>建立完整的 AI 協作系統，從內容規劃、創作到發布的全流程</td>
+                                </tr>
+                                <tr>
+                                    <th>上課時間</th>
+                                    <td>每週一、三晚上 8:30-10:00（每次 1-1.5 小時，共六週）</td>
+                                </tr>
+                                <tr>
+                                    <th>上課方式</th>
+                                    <td>線上一對一教學 + 週間 LINE 持續互動</td>
+                                </tr>
+                                <tr>
+                                    <th>課程費用</th>
+                                    <td>NT$ 10,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <WeekSection 
+                        week="第一週"
+                        title="建立基礎：從混亂到第一篇貼文"
+                        icon={<Icons.Target />}
+                        goal="發出第一篇用 AI 協作完成的貼文"
+                        learns={[
+                            "2W1H 框架：釐清你的受眾是誰、你要給他們什麼",
+                            "AI 溝通的正確方式：不是問問題，是對話",
+                            "用 ChatGPT 從發散想法到完成一篇完整貼文",
+                            "定義你的個人風格，建立可重複使用的 prompt 模板"
+                        ]}
+                        completes={[
+                            "發布第一篇 AI 協作貼文（實際發布到你的社群平台）",
+                            "建立你的風格 prompt 模板",
+                            "用新模板練習寫三篇不同主題的貼文"
+                        ]}
+                    />
+
+                    <WeekSection 
+                        week="第二週"
+                        title="批量思考：建立內容規劃系統"
+                        icon={<Icons.Calendar />}
+                        goal="建立未來一個月的內容日曆"
+                        learns={[
+                            "內容分類方法：知識型、故事型、互動型、服務型",
+                            "用 AI 建立主題庫和內容日曆",
+                            "圖片生成基礎：用 ChatGPT DALL-E 做出療癒風格的配圖",
+                            "Google Sheet 內容管理系統的建立和使用"
+                        ]}
+                        completes={[
+                            "完整的一個月內容日曆（至少 12 個貼文主題）",
+                            "為下週要發的貼文生成配圖",
+                            "建立你專屬的內容管理 Google Sheet"
+                        ]}
+                    />
+
+                    <WeekSection 
+                        week="第三週"
+                        title="執行優化：建立穩定的發文節奏"
+                        icon={<Icons.TrendingUp />}
+                        goal="建立可持續執行的發文 SOP"
+                        learns={[
+                            "分析前兩週的發文數據，找出有效內容的規律",
+                            "一稿多用技巧：一個主題變成多種形式的內容",
+                            "發文 SOP 的建立：從規劃、創作、發布到數據收集的完整流程",
+                            "時間管理：每天只需 30 分鐘維持自媒體經營"
+                        ]}
+                        completes={[
+                            "你的專屬發文 SOP 檢查清單",
+                            "至少一個主題的多形式內容變化（長文、短文、限時動態）",
+                            "確定你的固定發文頻率和時段"
+                        ]}
+                    />
+
+                    <WeekSection 
+                        week="第四週"
+                        title="自動化：減少重複工作"
+                        icon={<Icons.Zap />}
+                        goal="建立自動回覆系統和數據追蹤習慣"
+                        learns={[
+                            "LINE Bot 或 Instagram 自動回覆的基礎設定",
+                            "數據收集的方法和重點指標",
+                            "用簡單的方式視覺化你的數據，找出改進方向",
+                            "如何用數據驅動內容決策"
+                        ]}
+                        completes={[
+                            "一個實際運作的自動回覆系統（處理預約、諮詢等常見問題）",
+                            "完整的歷史數據收集和分析",
+                            "找出你的高效內容類型和發布時段"
+                        ]}
+                    />
+
+                    <WeekSection 
+                        week="第五週"
+                        title="品牌建立：從社群到個人網站"
+                        icon={<Icons.Lightbulb />}
+                        goal="建立你的個人品牌網站"
+                        learns={[
+                            "用 GitHub Pages 建立免費的個人網站（不需要寫程式）",
+                            "如何規劃系列內容，建立粉絲期待感",
+                            "把散落的社群平台整合成完整的品牌體驗",
+                            "從社群引流到個人網站，提高預約轉換"
+                        ]}
+                        completes={[
+                            "一個專業的個人品牌網站（類似 Linktree 但更有質感）",
+                            "第一個系列內容企劃（例如：原生家庭療癒五部曲）",
+                            "完整的線上品牌呈現：社群 + 網站 + 自動化系統"
+                        ]}
+                    />
+
+                    <WeekSection 
+                        week="第六週"
+                        title="系統整合：建立長期可用的工具包"
+                        icon={<Icons.Award />}
+                        goal="建立可持續運作的 AI 協作系統"
+                        learns={[
+                            "整理你專屬的 AI 工具包（所有 prompt、流程、資源）",
+                            "回顧六週成果，分析改善幅度",
+                            "未來自學方向規劃（影片、付費內容、規模化）",
+                            "如何持續優化系統，保持競爭力"
+                        ]}
+                        completes={[
+                            "完整的個人 AI 工具包（隨時可調用的所有模板和流程）",
+                            "六週學習成果報告",
+                            "未來三個月的自媒體成長計畫"
+                        ]}
+                    />
+
+                    <Outcomes />
+                    <Includes />
+                    <NextSteps />
+                    <Footer />
+                </div>
+            );
+        }
+
+        function WeekSection({ week, title, icon, goal, learns, completes }) {
+            return (
+                <section className="week-section">
+                    <div className="week-header">
+                        {icon}
+                        <h2>{week}｜{title}</h2>
+                    </div>
+                    <div className="week-content">
+                        <div className="week-goal">
+                            <h3>核心目標：{goal}</h3>
+                        </div>
+                        
+                        <div className="learn-list">
+                            <h3>你會學到</h3>
+                            <ul>
+                                {learns.map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="complete-list">
+                            <h3>你會完成</h3>
+                            <ul>
+                                {completes.map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Outcomes() {
+            const outcomes = [
+                {
+                    title: "一套完整的 AI 協作系統",
+                    desc: "從內容規劃、文案撰寫、圖片生成到發布管理的完整流程"
+                },
+                {
+                    title: "你的專屬工具包",
+                    desc: "包含所有 prompt 模板、SOP 流程、常用資源，隨時可用"
+                },
+                {
+                    title: "一個個人品牌網站",
+                    desc: "整合你的服務介紹、社群連結、預約系統"
+                },
+                {
+                    title: "穩定的內容產出能力",
+                    desc: "不再為「不知道發什麼」而困擾，有系統地持續創作"
+                },
+                {
+                    title: "自動化互動系統",
+                    desc: "LINE Bot 或 Instagram 自動回覆，節省重複工作時間"
+                },
+                {
+                    title: "數據驅動的決策能力",
+                    desc: "知道什麼內容有效、如何優化、往哪個方向調整"
+                },
+                {
+                    title: "可持續執行的習慣",
+                    desc: "每天 30 分鐘就能維持自媒體經營的高效工作流"
+                }
+            ];
+
+            return (
+                <section className="outcomes">
+                    <h2>這六週結束後，你會擁有</h2>
+                    <div className="outcome-grid">
+                        {outcomes.map((outcome, index) => (
+                            <div key={index} className="outcome-item">
+                                <Icons.CheckCircle />
+                                <div className="outcome-text">
+                                    <strong>{outcome.title}</strong>
+                                    <div>{outcome.desc}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            );
+        }
+
+        function Includes() {
+            const items = [
+                "18 小時完整教學（正式課程 + 週間互動）",
+                "Google Sheet 內容管理系統模板",
+                "個人 AI 工具包（所有 prompt 和 SOP）",
+                "個人品牌網站（GitHub Pages）",
+                "LINE Bot 或 Instagram 自動回覆系統",
+                "所有課程錄影檔案（供複習使用）",
+                "課程研習證書",
+                "課後一個月的 LINE 答疑支援"
+            ];
+
+            return (
+                <section className="includes">
+                    <h2>課程包含</h2>
+                    <div className="includes-grid">
+                        {items.map((item, index) => (
+                            <div key={index} className="include-item">
+                                <Icons.Package />
+                                <span>{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            );
+        }
+
+        function NextSteps() {
+            return (
+                <section className="next-steps">
+                    <h2>下一步</h2>
+                    <p>請確認以下事項，我們就可以開始：</p>
+                    <ol>
+                        <li><strong>時間確認：</strong>每週一、三晚上 8:30-10:00 是否適合你？</li>
+                        <li><strong>課程內容：</strong>以上六週的學習路徑是否符合你的期待？</li>
+                        <li><strong>開課日期：</strong>你希望什麼時候開始？</li>
+                    </ol>
+                    <p style={{ marginTop: '20px' }}>
+                        確認後，我會寄給你繳費資訊和課前準備清單。<br/>
+                        有任何問題都可以直接問我，我們隨時可以討論調整。
+                    </p>
+                    <p style={{ marginTop: '20px', fontWeight: 'bold' }}>
+                        期待和你一起建立屬於你的 AI 自媒體系統！
+                    </p>
+                </section>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer>
+                    <div>
+                        <strong>Cruz Tang</strong><br/>
+                        ThinkerCafe 創辦人 & AI 協作系統架構師
+                    </div>
+                    <div className="contact-info">
+                        <div className="contact-item">
+                            <Icons.Mail />
+                            <span>cruz@thinkercafe.com</span>
+                        </div>
+                        <div className="contact-item">
+                            <Icons.MessageCircle />
+                            <span>LINE ID: cruztang</span>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
