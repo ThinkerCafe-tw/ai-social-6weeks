@@ -1,6 +1,6 @@
 # AI 自媒體系統建立課程 - 六週陪跑計畫
 
-> 由 Cruz Tang (@tangcruzz) 開發，ThinkerCafe 一對一專屬教學
+> 由湯 Cruz 開發，思考者咖啡 一對一專屬教學
 
 ## 🎯 這是什麼？
 
@@ -144,11 +144,10 @@ ai-social-6weeks/
 
 ## 📞 聯絡方式
 
-**Cruz Tang**  
-ThinkerCafe 創辦人 & AI 協作系統架構師
+**湯 Cruz**  
+思考者咖啡 創辦人 & AI 協作系統架構師
 
-- 📧 Email: cruz@thinkercafe.com
-- 💬 LINE ID: cruztang
+- 📧 Email: cruz@thinker.cafe
 - 🌐 Website: [thinkercafe.com](https://thinkercafe.com)
 - 📱 Threads: [@tangcruzz](https://threads.net/@tangcruzz)
 
