@@ -968,7 +968,6 @@
                 timeConfirm: '',
                 contentConfirm: '',
                 startDate: '',
-                invoiceNeeded: '',
                 questions: ''
             });
 
@@ -989,9 +988,6 @@ Email：${formData.email || '[請填寫]'}
 
 3. 開課日期：11/24（日）開始
    我的回答：${formData.startDate || '[請選擇]'}
-
-4. 發票需求
-   我的回答：${formData.invoiceNeeded || '[請選擇]'}
 
 💬 其他問題或備註
 ${formData.questions || '[無]'}`;
@@ -1016,7 +1012,6 @@ ${formData.questions || '[無]'}`;
                         <li><strong>時間確認：</strong>每週一、三晚上 8:30-9:30（每次 1 小時正式課程，週間持續陪伴追蹤）</li>
                         <li><strong>課程內容：</strong>以上六週的學習路徑是否符合你的期待？</li>
                         <li><strong>開課日期：</strong>11/24（日）開始，是否可以配合？</li>
-                        <li><strong>發票需求：</strong>是否需要開立發票？（不需要發票可享 95 折優惠，NT$ 9,500）</li>
                     </ol>
 
                     <div className="copy-section">
@@ -1078,15 +1073,6 @@ ${formData.questions || '[無]'}`;
                                     <option value="">請選擇</option>
                                     <option value="可以">可以</option>
                                     <option value="需要調整">需要調整</option>
-                                </select>
-                            </div>
-
-                            <div className="form-group">
-                                <label>4. 發票需求</label>
-                                <select value={formData.invoiceNeeded} onChange={(e) => handleChange('invoiceNeeded', e.target.value)}>
-                                    <option value="">請選擇</option>
-                                    <option value="需要發票 NT$ 10,000">需要發票 NT$ 10,000</option>
-                                    <option value="不需要發票 NT$ 9,500">不需要發票 NT$ 9,500</option>
                                 </select>
                             </div>
 
