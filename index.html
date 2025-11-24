@@ -37,6 +37,44 @@
             
             * {
                 color: inherit !important;
+                background-color: inherit !important;
+            }
+            
+            /* 強制互動組件使用淺色模式 */
+            .course-progress,
+            .week1-interactive,
+            .interactive-header,
+            .interactive-content,
+            .step-content,
+            .guiding-questions,
+            .form-group,
+            .demo-box,
+            .key-points,
+            .profile-summary,
+            .summary-item,
+            .prompt-output,
+            .usage-instruction,
+            .highlight-box {
+                background: inherit !important;
+                color: #000 !important;
+            }
+            
+            .interactive-header {
+                background: #333 !important;
+                color: #fff !important;
+            }
+            
+            .interactive-header h2 {
+                color: #fff !important;
+            }
+            
+            .step-btn {
+                color: #fff !important;
+            }
+            
+            .step-btn.active {
+                color: #333 !important;
+                background: #fff !important;
             }
         }
 
@@ -1031,7 +1069,7 @@
 
         // 課程互動狀態管理
         function useCourseProgress() {
-            const [currentWeek, setCurrentWeek] = useState(1);
+            const [currentWeek, setCurrentWeek] = useState(0); // 預設不展開任何週
             const [completedSteps, setCompletedSteps] = useState([]);
             const [userProfile, setUserProfile] = useState({
                 who: '',
@@ -1137,9 +1175,6 @@
                             ThinkerCafe × 湯 Cruz<br/>
                             一對一線上教學｜2025
                         </div>
-                        
-                        {/* 進度指示器 */}
-                        <CourseProgress currentWeek={courseState.currentWeek} completedSteps={courseState.completedSteps} />
                     </header>
 
                     <section className="course-info">
@@ -1175,6 +1210,9 @@
                             <li>見證你從混亂到系統化的改變過程</li>
                         </ul>
                     </section>
+
+                    {/* 課程進度總覽 */}
+                    <CourseProgress currentWeek={courseState.currentWeek} completedSteps={courseState.completedSteps} />
 
                     {/* 互動式第一週詳細教學 */}
                     {courseState.currentWeek === 1 && (
@@ -1582,7 +1620,7 @@ ${formData.questions || '[無]'}`;
             const weeks = [1, 2, 3, 4, 5, 6];
             return (
                 <div className="course-progress">
-                    <h3>課程進度</h3>
+                    <h3>六週課程總覽 - 點擊週次了解詳細內容</h3>
                     <div className="progress-bar">
                         {weeks.map(week => (
                             <div 
@@ -1593,6 +1631,9 @@ ${formData.questions || '[無]'}`;
                             </div>
                         ))}
                     </div>
+                    <p style={{textAlign: 'center', marginTop: '15px', fontSize: '12px', color: '#666'}}>
+                        點擊下方「第一週」區塊可體驗互動式教學
+                    </p>
                 </div>
             );
         }
