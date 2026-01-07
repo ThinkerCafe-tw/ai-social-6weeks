@@ -1740,24 +1740,37 @@
                     Pivot: "掏出法寶",
                     Insight: "體悟與CTA"
                 },
-                promptTemplate: (annoyance, tool) => `你是一位專業的自媒體文案創作者，擅長把真實職場故事轉化為療癒型貼文。
+                promptTemplate: (annoyance, tool) => `你現在是沛綺，一位「身處高壓工地現場的身心靈療癒師」。
+你的寫作風格是：真實、短促、有畫面感，帶著一點點對人性的溫柔觀察。
 
-請用以下「黃金公式」幫我寫一篇 Threads 貼文：
+請參考以下兩篇【你的代表作】，並學習其語氣與節奏：
 
-【場景輸入】
-- 今天的工地鳥事：${annoyance}
-- 我的療癒法寶：${tool}
+【參考範文 1：工地暴走】
+"這行做久了才懂，工地情緒不是衝誰，而是被工期、天氣、材料逼到喘不過氣。延一次被追一次，失誤一下就被放大。沉默的技師嘴上說沒事，菸卻抽得越來越快，背後是壓力和責任。我做療癒系室內設計，只希望家成為他們卸下疲憊、不必硬撐的地方。"
 
-【黃金公式】
-1. Hook（感官細節）：用畫面感描述混亂場景，讓讀者身歷其境
-2. Vulnerability（承認脆弱）：誠實說出「我差點就崩潰了」的瞬間
-3. Pivot（掏出法寶）：轉折——我掏出了「${tool}」
-4. Insight（體悟與CTA）：從這個瞬間我學到什麼？給讀者一個可行動的建議
+【參考範文 2：情緒管理】
+"工程一延被追、被催、被質疑的聲音就一起來了。表面看起來是在趕進度，其實是在扛情緒。久了人不是氣工程，是開始怪自己怎麼都不夠快。情緒爆開不是不專業，是心早就超載。先把人穩住，事情才有辦法走下去。"
 
-【輸出要求】
-- 字數：150-200 字
-- 語氣：真實、溫暖、有點自嘲
-- 結尾：用一個問題邀請讀者互動`,
+---
+
+現在，請運用上述的「語氣風格」與「短句節奏」，將以下的素材寫成一篇貼文：
+
+【輸入素材】
+- 今天的崩潰瞬間：${annoyance}
+- 我的轉念法寶：${tool}
+
+【寫作結構要求】
+1. **Hook (感官與焦慮)**：不要寫"今天我很生氣"，要寫出畫面（例如：電話聲、粉塵、師傅的表情）。用短句堆疊壓力感。
+2. **Vulnerability (內在獨白)**：承認自己當下也差點撐不住，心裡的ＯＳ是什麼？
+3. **The Switch (法寶介入)**：描述拿出「${tool}」的那一刻。不是說教，而是描述那個「暫停」的瞬間感覺（例如：空氣突然安靜了、味道變了）。
+4. **Insight (結尾)**：不用打雞血。只要給一句溫柔的總結。
+
+【絕對禁止】
+- 禁止使用 AI 常用的連接詞（如：總而言之、在這個繁忙的都市、讓我們一起）。
+- 禁止寫得像教科書。
+- 保持「碎唸感」與「人味」。
+
+貼文內容：`,
                 placeholders: {
                     annoyance: "例如：客戶在驗收時突然改了 15 處，說「這不是我要的感覺」",
                     tool: "例如：聽一首歌 / 喝杯熱茶 / 走到陽台深呼吸"
@@ -1882,6 +1895,23 @@
         function App() {
             const courseState = useCourseProgress();
             const { meta, courseInfo, companionItems, weeks } = COURSE_DATA;
+            const interactiveRef = useRef(null);
+
+            // 展開週次並捲動到互動工具區域
+            const handleWeekExpand = (weekNum) => {
+                const wasExpanded = courseState.currentWeek === weekNum;
+                courseState.setCurrentWeek(wasExpanded ? 0 : weekNum);
+
+                // 只在展開時捲動到互動工具區域
+                if (!wasExpanded) {
+                    setTimeout(() => {
+                        interactiveRef.current?.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            };
 
             return (
                 <div>
@@ -1929,18 +1959,20 @@
                     {/* 課程進度總覽 */}
                     <CourseProgress currentWeek={courseState.currentWeek} completedSteps={courseState.completedSteps} />
 
-                    {/* 互動式教學模組 */}
-                    {courseState.currentWeek === 1 && (
-                        <Week1Interactive
-                            userProfile={courseState.userProfile}
-                            updateProfile={courseState.updateProfile}
-                            markStepComplete={courseState.markStepComplete}
-                            completedSteps={courseState.completedSteps}
-                        />
-                    )}
-                    {courseState.currentWeek === 3 && (
-                        <Week3Interactive config={COURSE_DATA.week3Config} />
-                    )}
+                    {/* 互動式教學模組 - 捲動目標 */}
+                    <div ref={interactiveRef}>
+                        {courseState.currentWeek === 1 && (
+                            <Week1Interactive
+                                userProfile={courseState.userProfile}
+                                updateProfile={courseState.updateProfile}
+                                markStepComplete={courseState.markStepComplete}
+                                completedSteps={courseState.completedSteps}
+                            />
+                        )}
+                        {courseState.currentWeek === 3 && (
+                            <Week3Interactive config={COURSE_DATA.week3Config} />
+                        )}
+                    </div>
 
                     {/* 週次內容 - 使用 COURSE_DATA 映射 */}
                     {weeks.map((weekData) => (
@@ -1954,7 +1986,7 @@
                             completes={weekData.completes}
                             isActive={courseState.currentWeek === weekData.week}
                             onExpand={weekData.hasInteractive ?
-                                () => courseState.setCurrentWeek(courseState.currentWeek === weekData.week ? 0 : weekData.week) :
+                                () => handleWeekExpand(weekData.week) :
                                 undefined
                             }
                         />
@@ -1969,30 +2001,11 @@
         }
 
         function WeekSection({ week, title, icon, goal, learns, completes, isActive = false, onExpand }) {
-            const sectionRef = useRef(null);
-
-            const handleExpand = () => {
-                if (!onExpand) return;
-
-                const wasActive = isActive;
-                onExpand();
-
-                // 只在展開時自動捲動（不是收合時）
-                if (!wasActive) {
-                    setTimeout(() => {
-                        sectionRef.current?.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }, 100);
-                }
-            };
-
             return (
-                <section ref={sectionRef} className={`week-section ${isActive ? 'active' : ''}`}>
+                <section className={`week-section ${isActive ? 'active' : ''}`}>
                     <div
                         className="week-header"
-                        onClick={handleExpand}
+                        onClick={onExpand}
                         style={{ cursor: onExpand ? 'pointer' : 'default' }}
                     >
                         {icon}
