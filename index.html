@@ -1226,6 +1226,309 @@
                 page-break-inside: avoid;
             }
         }
+
+        /* ============================================
+           Week 3 Interactive - 工地療癒師轉化器
+           ============================================ */
+        .week3-interactive {
+            margin: 30px 0;
+            border: 3px solid #333;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .week3-interactive .interactive-header {
+            background: linear-gradient(135deg, #333 0%, #555 100%);
+            color: #fff;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .week3-interactive .interactive-header h2 {
+            margin: 0;
+            font-size: 18pt;
+            color: #fff !important;
+        }
+
+        .step-indicator {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .week3-interactive .interactive-content {
+            padding: 30px;
+            background: #fff;
+        }
+
+        /* 公式展示 */
+        .formula-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .formula-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 18px;
+            background: #fff;
+            border: 2px solid #333;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+
+        .formula-name {
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .formula-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .formula-arrow {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 提示詞輸出區 - 程式碼編輯器風格 */
+        .prompt-output {
+            background: #1e1e1e !important;
+            border: 2px solid #333 !important;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .prompt-output pre {
+            margin: 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Courier New', monospace !important;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #d4d4d4 !important;
+        }
+
+        /* 大型複製按鈕 */
+        .copy-btn-large {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #333;
+            color: #fff !important;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+        }
+
+        .copy-btn-large:hover {
+            background: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .copy-btn-large.copied {
+            background: #28a745 !important;
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* 按鈕群組 */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            padding: 12px 20px;
+            font-size: 14px;
+            background: #e9ecef;
+            color: #333 !important;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #dee2e6;
+        }
+
+        .restart-btn {
+            padding: 12px 20px;
+            font-size: 14px;
+            background: #fff;
+            color: #333 !important;
+            border: 2px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .restart-btn:hover {
+            background: #333;
+            color: #fff !important;
+        }
+
+        .generate-btn {
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff !important;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .generate-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .generate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* 必填標記 */
+        .required {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        /* Week3 深色模式覆蓋 */
+        @media (prefers-color-scheme: dark) {
+            .week3-interactive {
+                background: #fff !important;
+                border-color: #333 !important;
+            }
+
+            .week3-interactive .interactive-content {
+                background: #fff !important;
+                color: #333 !important;
+            }
+
+            .week3-interactive .step-content,
+            .week3-interactive .step-content h3,
+            .week3-interactive .step-content p {
+                color: #333 !important;
+            }
+
+            .formula-display {
+                background: #f8f9fa !important;
+            }
+
+            .formula-step {
+                background: #fff !important;
+                border-color: #333 !important;
+            }
+
+            .formula-name {
+                color: #333 !important;
+            }
+
+            .formula-label {
+                color: #666 !important;
+            }
+
+            .prompt-output {
+                background: #1e1e1e !important;
+            }
+
+            .prompt-output pre {
+                color: #d4d4d4 !important;
+            }
+
+            .week3-interactive .key-points {
+                background: #f9f9f9 !important;
+                color: #333 !important;
+            }
+
+            .week3-interactive .key-points h4,
+            .week3-interactive .key-points li {
+                color: #555 !important;
+            }
+
+            .week3-interactive .usage-instruction {
+                background: #e9ecef !important;
+                color: #333 !important;
+            }
+
+            .week3-interactive .usage-instruction h4,
+            .week3-interactive .usage-instruction li {
+                color: #555 !important;
+            }
+        }
+
+        /* Week3 響應式設計 */
+        @media screen and (max-width: 768px) {
+            .week3-interactive .interactive-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .week3-interactive .interactive-header h2 {
+                font-size: 16pt;
+            }
+
+            .formula-display {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .formula-arrow {
+                transform: rotate(90deg);
+            }
+
+            .formula-step {
+                width: 100%;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .generate-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1233,6 +1536,238 @@
 
     <script type="text/babel">
         const { useState } = React;
+
+        // ============================================
+        // COURSE_DATA - 集中式資料管理
+        // ============================================
+        const COURSE_DATA = {
+            // ===== META =====
+            meta: {
+                title: "AI 自媒體系統建立課程",
+                subtitle: "專屬於沛綺的六週陪跑計畫",
+                version: "2.0",
+                targetUser: "沛綺"
+            },
+
+            // ===== COURSE INFO =====
+            courseInfo: {
+                goal: "建立完整的 AI 協作系統，從內容規劃、創作到發布的全流程",
+                schedule: "每週一、三晚上 8:30-9:30（每次 1 小時，共六週）",
+                format: "線上一對一教學 + 週間持續陪伴與任務追蹤",
+                fee: "NT$ 10,000"
+            },
+
+            // ===== COMPANION BOX =====
+            companionItems: [
+                "每天檢查學習進度和作業完成狀況",
+                "給予具體回饋和改進建議",
+                "追蹤實際發文和數據表現",
+                "即時解答遇到的問題",
+                "見證你從混亂到系統化的改變過程"
+            ],
+
+            // ===== WEEKS =====
+            weeks: [
+                {
+                    week: 1,
+                    weekLabel: "第一週",
+                    title: "建立基礎：從混亂到第一篇貼文",
+                    icon: "Target",
+                    goal: "發出第一篇用 AI 協作完成的貼文",
+                    learns: [
+                        "2W1H 框架：釐清你的受眾是誰、你要給他們什麼",
+                        "AI 溝通的正確方式：不是問問題，是對話",
+                        "用 ChatGPT 從發散想法到完成一篇完整貼文",
+                        "定義你的個人風格，建立可重複使用的 prompt 模板"
+                    ],
+                    completes: [
+                        "發布第一篇 AI 協作貼文（實際發布到你的社群平台）",
+                        "建立你的風格 prompt 模板",
+                        "用新模板練習寫三篇不同主題的貼文"
+                    ],
+                    hasInteractive: true,
+                    interactiveComponent: "Week1Interactive"
+                },
+                {
+                    week: 2,
+                    weekLabel: "第二週",
+                    title: "批量思考：建立內容規劃系統",
+                    icon: "Calendar",
+                    goal: "建立未來一個月的內容日曆",
+                    learns: [
+                        "內容分類方法：知識型、故事型、互動型、服務型",
+                        "用 AI 建立主題庫和內容日曆",
+                        "圖片生成基礎：用 ChatGPT DALL-E 做出療癒風格的配圖",
+                        "Google Sheet 內容管理系統的建立和使用"
+                    ],
+                    completes: [
+                        "完整的一個月內容日曆（至少 12 個貼文主題）",
+                        "為下週要發的貼文生成配圖",
+                        "建立你專屬的內容管理 Google Sheet"
+                    ],
+                    hasInteractive: false
+                },
+                {
+                    week: 3,
+                    weekLabel: "第三週",
+                    title: "真實定位：工地裡的修道場",
+                    icon: "Zap",
+                    goal: "將職場修羅場轉化為療癒流量密碼",
+                    learns: [
+                        "戰地急救包理論：在混亂中建立你的內在穩定錨點",
+                        "黃金提示詞公式：Hook → Vulnerability → Pivot → Insight",
+                        "差異化定位：為什麼「工地裡的療癒師」比「通用療癒師」更有力",
+                        "場景化寫作：把每天的工地鳥事變成療癒金句"
+                    ],
+                    completes: [
+                        "完成「戰地急救包」個人版（3-5 個快速回穩技巧）",
+                        "用黃金提示詞公式寫出 3 篇工地療癒貼文",
+                        "確立你的差異化定位宣言（一句話版本）"
+                    ],
+                    hasInteractive: true,
+                    interactiveComponent: "Week3Interactive"
+                },
+                {
+                    week: 4,
+                    weekLabel: "第四週",
+                    title: "自動化引流：將互動轉化為實際聯繫",
+                    icon: "TrendingUp",
+                    goal: "建立 Instagram 自動引流機制和數據追蹤習慣",
+                    learns: [
+                        "用 ManyChat 設定 Instagram 自動私訊（留言觸發）",
+                        "設計有效的引流關鍵字和自動回覆內容",
+                        "數據收集的方法和重點指標",
+                        "用簡單的方式視覺化你的數據，找出改進方向"
+                    ],
+                    completes: [
+                        "一個實際運作的 Instagram 自動引流機制（用戶留言即自動私訊）",
+                        "2-3 組引流關鍵字和對應的自動回覆內容",
+                        "完整的歷史數據收集和分析"
+                    ],
+                    hasInteractive: false
+                },
+                {
+                    week: 5,
+                    weekLabel: "第五週",
+                    title: "品牌建立：從社群到個人網站",
+                    icon: "Lightbulb",
+                    goal: "建立你的個人品牌展示網站",
+                    learns: [
+                        "用 GitHub Pages 建立免費的個人網站（不需要寫程式）",
+                        "設計從社群到聯繫的完整流程（IG → 網站 → 預約/諮詢）",
+                        "把散落的平台整合成完整的品牌體驗",
+                        "如何規劃系列內容，建立粉絲期待感"
+                    ],
+                    completes: [
+                        "一個專業的個人品牌展示網站（整合自我介紹、服務項目、社群連結、聯絡方式）",
+                        "第一個系列內容企劃（例如：原生家庭療癒五部曲）",
+                        "完整的線上品牌呈現：社群 + 網站 + 引流機制"
+                    ],
+                    hasInteractive: false
+                },
+                {
+                    week: 6,
+                    weekLabel: "第六週",
+                    title: "系統整合：建立長期可用的工具包",
+                    icon: "Award",
+                    goal: "建立可持續運作的 AI 協作系統",
+                    learns: [
+                        "整理你專屬的 AI 工具包（所有 prompt、流程、資源）",
+                        "回顧六週成果，分析改善幅度",
+                        "未來自學方向規劃（影片、付費內容、規模化）",
+                        "如何持續優化系統，保持競爭力"
+                    ],
+                    completes: [
+                        "完整的個人 AI 工具包（隨時可調用的所有模板和流程）",
+                        "六週學習成果報告",
+                        "未來三個月的自媒體成長計畫"
+                    ],
+                    hasInteractive: false
+                }
+            ],
+
+            // ===== OUTCOMES =====
+            outcomes: [
+                {
+                    title: "一套完整的 AI 協作系統",
+                    desc: "從內容規劃、文案撰寫、圖片生成到發布管理的完整流程"
+                },
+                {
+                    title: "你的專屬工具包",
+                    desc: "包含所有 prompt 模板、SOP 流程、常用資源，隨時可用"
+                },
+                {
+                    title: "一個個人品牌展示網站",
+                    desc: "整合你的自我介紹、服務項目、社群連結、聯絡方式"
+                },
+                {
+                    title: "穩定的內容產出能力",
+                    desc: "不再為「不知道發什麼」而困擾，有系統地持續創作"
+                },
+                {
+                    title: "Instagram 自動引流機制",
+                    desc: "用 ManyChat 將互動轉化為實際聯繫，提高轉換效率"
+                },
+                {
+                    title: "數據驅動的決策能力",
+                    desc: "知道什麼內容有效、如何優化、往哪個方向調整"
+                },
+                {
+                    title: "可持續執行的習慣",
+                    desc: "每天 30 分鐘就能維持自媒體經營的高效工作流"
+                }
+            ],
+
+            // ===== INCLUDES =====
+            includes: [
+                "18 小時完整教學（正式課程 + 週間互動）",
+                "Google Sheet 內容管理系統模板",
+                "個人 AI 工具包（所有 prompt 和 SOP）",
+                "個人品牌展示網站（GitHub Pages）",
+                "Instagram 自動引流系統（ManyChat）",
+                "所有課程錄影檔案（供複習使用）",
+                "課程研習證書",
+                "課後一個月的 LINE 答疑支援"
+            ],
+
+            // ===== WEEK 3 INTERACTIVE CONFIG =====
+            week3Config: {
+                toolTitle: "工地療癒師轉化器",
+                formulaSteps: ['Hook', 'Vulnerability', 'Pivot', 'Insight'],
+                formulaLabels: {
+                    Hook: "混亂場景",
+                    Vulnerability: "差點崩潰",
+                    Pivot: "掏出法寶",
+                    Insight: "體悟與CTA"
+                },
+                promptTemplate: (annoyance, tool) => `你是一位專業的自媒體文案創作者，擅長把真實職場故事轉化為療癒型貼文。
+
+請用以下「黃金公式」幫我寫一篇 Threads 貼文：
+
+【場景輸入】
+- 今天的工地鳥事：${annoyance}
+- 我的療癒法寶：${tool}
+
+【黃金公式】
+1. Hook（感官細節）：用畫面感描述混亂場景，讓讀者身歷其境
+2. Vulnerability（承認脆弱）：誠實說出「我差點就崩潰了」的瞬間
+3. Pivot（掏出法寶）：轉折——我掏出了「${tool}」
+4. Insight（體悟與CTA）：從這個瞬間我學到什麼？給讀者一個可行動的建議
+
+【輸出要求】
+- 字數：150-200 字
+- 語氣：真實、溫暖、有點自嘲
+- 結尾：用一個問題邀請讀者互動`,
+                placeholders: {
+                    annoyance: "例如：客戶在驗收時突然改了 15 處，說「這不是我要的感覺」",
+                    tool: "例如：聽一首歌 / 喝杯熱茶 / 走到陽台深呼吸"
+                },
+                inputLabels: {
+                    annoyance: "今天的工地鳥事",
+                    tool: "你的療癒法寶"
+                }
+            }
+        };
 
         // 課程互動狀態管理
         function useCourseProgress() {
@@ -1330,14 +1865,29 @@
             ),
         };
 
+        // 取得圖標組件的輔助函數
+        function getIconComponent(iconName) {
+            const iconMap = {
+                Target: Icons.Target,
+                Calendar: Icons.Calendar,
+                TrendingUp: Icons.TrendingUp,
+                Zap: Icons.Zap,
+                Lightbulb: Icons.Lightbulb,
+                Award: Icons.Award
+            };
+            const IconComponent = iconMap[iconName];
+            return IconComponent ? <IconComponent /> : null;
+        }
+
         function App() {
             const courseState = useCourseProgress();
-            
+            const { meta, courseInfo, companionItems, weeks } = COURSE_DATA;
+
             return (
                 <div>
                     <header>
-                        <h1>AI 自媒體系統建立課程</h1>
-                        <div className="subtitle">專屬於沛綺的六週陪跑計畫</div>
+                        <h1>{meta.title}</h1>
+                        <div className="subtitle">{meta.subtitle}</div>
                         <div className="meta">
                             ThinkerCafe × 湯 Cruz<br/>
                             一對一線上教學｜2025
@@ -1349,19 +1899,19 @@
                             <tbody>
                                 <tr>
                                     <th>課程目標</th>
-                                    <td>建立完整的 AI 協作系統，從內容規劃、創作到發布的全流程</td>
+                                    <td>{courseInfo.goal}</td>
                                 </tr>
                                 <tr>
                                     <th>上課時間</th>
-                                    <td>每週一、三晚上 8:30-9:30（每次 1 小時，共六週）</td>
+                                    <td>{courseInfo.schedule}</td>
                                 </tr>
                                 <tr>
                                     <th>上課方式</th>
-                                    <td>線上一對一教學 + 週間持續陪伴與任務追蹤</td>
+                                    <td>{courseInfo.format}</td>
                                 </tr>
                                 <tr>
                                     <th>課程費用</th>
-                                    <td>NT$ 10,000</td>
+                                    <td>{courseInfo.fee}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1370,136 +1920,45 @@
                     <section className="companion-box">
                         <h3>週間陪伴機制：不只上課，更是帶著你成長</h3>
                         <ul>
-                            <li>每天檢查學習進度和作業完成狀況</li>
-                            <li>給予具體回饋和改進建議</li>
-                            <li>追蹤實際發文和數據表現</li>
-                            <li>即時解答遇到的問題</li>
-                            <li>見證你從混亂到系統化的改變過程</li>
+                            {companionItems.map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
                         </ul>
                     </section>
 
                     {/* 課程進度總覽 */}
                     <CourseProgress currentWeek={courseState.currentWeek} completedSteps={courseState.completedSteps} />
 
-                    {/* 互動式第一週詳細教學 */}
+                    {/* 互動式教學模組 */}
                     {courseState.currentWeek === 1 && (
-                        <Week1Interactive 
+                        <Week1Interactive
                             userProfile={courseState.userProfile}
                             updateProfile={courseState.updateProfile}
                             markStepComplete={courseState.markStepComplete}
                             completedSteps={courseState.completedSteps}
                         />
                     )}
+                    {courseState.currentWeek === 3 && (
+                        <Week3Interactive config={COURSE_DATA.week3Config} />
+                    )}
 
-                    <WeekSection 
-                        week="第一週"
-                        title="建立基礎：從混亂到第一篇貼文"
-                        icon={<Icons.Target />}
-                        goal="發出第一篇用 AI 協作完成的貼文"
-                        learns={[
-                            "2W1H 框架：釐清你的受眾是誰、你要給他們什麼",
-                            "AI 溝通的正確方式：不是問問題，是對話",
-                            "用 ChatGPT 從發散想法到完成一篇完整貼文",
-                            "定義你的個人風格，建立可重複使用的 prompt 模板"
-                        ]}
-                        completes={[
-                            "發布第一篇 AI 協作貼文（實際發布到你的社群平台）",
-                            "建立你的風格 prompt 模板",
-                            "用新模板練習寫三篇不同主題的貼文"
-                        ]}
-                        isActive={courseState.currentWeek === 1}
-                        onExpand={() => courseState.setCurrentWeek(courseState.currentWeek === 1 ? 0 : 1)}
-                    />
-
-                    <WeekSection 
-                        week="第二週"
-                        title="批量思考：建立內容規劃系統"
-                        icon={<Icons.Calendar />}
-                        goal="建立未來一個月的內容日曆"
-                        learns={[
-                            "內容分類方法：知識型、故事型、互動型、服務型",
-                            "用 AI 建立主題庫和內容日曆",
-                            "圖片生成基礎：用 ChatGPT DALL-E 做出療癒風格的配圖",
-                            "Google Sheet 內容管理系統的建立和使用"
-                        ]}
-                        completes={[
-                            "完整的一個月內容日曆（至少 12 個貼文主題）",
-                            "為下週要發的貼文生成配圖",
-                            "建立你專屬的內容管理 Google Sheet"
-                        ]}
-                    />
-
-                    <WeekSection 
-                        week="第三週"
-                        title="執行優化：建立穩定的發文節奏"
-                        icon={<Icons.TrendingUp />}
-                        goal="建立可持續執行的發文 SOP"
-                        learns={[
-                            "分析前兩週的發文數據，找出有效內容的規律",
-                            "一稿多用技巧：一個主題變成多種形式的內容",
-                            "發文 SOP 的建立：從規劃、創作、發布到數據收集的完整流程",
-                            "時間管理：每天只需 30 分鐘維持自媒體經營"
-                        ]}
-                        completes={[
-                            "你的專屬發文 SOP 檢查清單",
-                            "至少一個主題的多形式內容變化（長文、短文、限時動態）",
-                            "確定你的固定發文頻率和時段"
-                        ]}
-                    />
-
-                    <WeekSection 
-                        week="第四週"
-                        title="自動化引流：將互動轉化為實際聯繫"
-                        icon={<Icons.Zap />}
-                        goal="建立 Instagram 自動引流機制和數據追蹤習慣"
-                        learns={[
-                            "用 ManyChat 設定 Instagram 自動私訊（留言觸發）",
-                            "設計有效的引流關鍵字和自動回覆內容",
-                            "數據收集的方法和重點指標",
-                            "用簡單的方式視覺化你的數據，找出改進方向"
-                        ]}
-                        completes={[
-                            "一個實際運作的 Instagram 自動引流機制（用戶留言即自動私訊）",
-                            "2-3 組引流關鍵字和對應的自動回覆內容",
-                            "完整的歷史數據收集和分析"
-                        ]}
-                    />
-
-                    <WeekSection 
-                        week="第五週"
-                        title="品牌建立：從社群到個人網站"
-                        icon={<Icons.Lightbulb />}
-                        goal="建立你的個人品牌展示網站"
-                        learns={[
-                            "用 GitHub Pages 建立免費的個人網站（不需要寫程式）",
-                            "設計從社群到聯繫的完整流程（IG → 網站 → 預約/諮詢）",
-                            "把散落的平台整合成完整的品牌體驗",
-                            "如何規劃系列內容，建立粉絲期待感"
-                        ]}
-                        completes={[
-                            "一個專業的個人品牌展示網站（整合自我介紹、服務項目、社群連結、聯絡方式）",
-                            "第一個系列內容企劃（例如：原生家庭療癒五部曲）",
-                            "完整的線上品牌呈現：社群 + 網站 + 引流機制"
-                        ]}
-                    />
-
-                    <WeekSection 
-                        week="第六週"
-                        title="系統整合：建立長期可用的工具包"
-                        icon={<Icons.Award />}
-                        goal="建立可持續運作的 AI 協作系統"
-                        learns={[
-                            "整理你專屬的 AI 工具包（所有 prompt、流程、資源）",
-                            "回顧六週成果，分析改善幅度",
-                            "未來自學方向規劃（影片、付費內容、規模化）",
-                            "如何持續優化系統，保持競爭力"
-                        ]}
-                        completes={[
-                            "完整的個人 AI 工具包（隨時可調用的所有模板和流程）",
-                            "六週學習成果報告",
-                            "未來三個月的自媒體成長計畫"
-                        ]}
-                    />
+                    {/* 週次內容 - 使用 COURSE_DATA 映射 */}
+                    {weeks.map((weekData) => (
+                        <WeekSection
+                            key={weekData.week}
+                            week={weekData.weekLabel}
+                            title={weekData.title}
+                            icon={getIconComponent(weekData.icon)}
+                            goal={weekData.goal}
+                            learns={weekData.learns}
+                            completes={weekData.completes}
+                            isActive={courseState.currentWeek === weekData.week}
+                            onExpand={weekData.hasInteractive ?
+                                () => courseState.setCurrentWeek(courseState.currentWeek === weekData.week ? 0 : weekData.week) :
+                                undefined
+                            }
+                        />
+                    ))}
 
                     <Outcomes />
                     <Includes />
@@ -1553,42 +2012,11 @@
         }
 
         function Outcomes() {
-            const outcomes = [
-                {
-                    title: "一套完整的 AI 協作系統",
-                    desc: "從內容規劃、文案撰寫、圖片生成到發布管理的完整流程"
-                },
-                {
-                    title: "你的專屬工具包",
-                    desc: "包含所有 prompt 模板、SOP 流程、常用資源，隨時可用"
-                },
-                {
-                    title: "一個個人品牌展示網站",
-                    desc: "整合你的自我介紹、服務項目、社群連結、聯絡方式"
-                },
-                {
-                    title: "穩定的內容產出能力",
-                    desc: "不再為「不知道發什麼」而困擾，有系統地持續創作"
-                },
-                {
-                    title: "Instagram 自動引流機制",
-                    desc: "用 ManyChat 將互動轉化為實際聯繫，提高轉換效率"
-                },
-                {
-                    title: "數據驅動的決策能力",
-                    desc: "知道什麼內容有效、如何優化、往哪個方向調整"
-                },
-                {
-                    title: "可持續執行的習慣",
-                    desc: "每天 30 分鐘就能維持自媒體經營的高效工作流"
-                }
-            ];
-
             return (
                 <section className="outcomes">
                     <h2>這六週結束後，你會擁有</h2>
                     <div className="outcome-grid">
-                        {outcomes.map((outcome, index) => (
+                        {COURSE_DATA.outcomes.map((outcome, index) => (
                             <div key={index} className="outcome-item">
                                 <Icons.CheckCircle />
                                 <div className="outcome-text">
@@ -1603,22 +2031,11 @@
         }
 
         function Includes() {
-            const items = [
-                "18 小時完整教學（正式課程 + 週間互動）",
-                "Google Sheet 內容管理系統模板",
-                "個人 AI 工具包（所有 prompt 和 SOP）",
-                "個人品牌展示網站（GitHub Pages）",
-                "Instagram 自動引流系統（ManyChat）",
-                "所有課程錄影檔案（供複習使用）",
-                "課程研習證書",
-                "課後一個月的 LINE 答疑支援"
-            ];
-
             return (
                 <section className="includes">
                     <h2>課程包含</h2>
                     <div className="includes-grid">
-                        {items.map((item, index) => (
+                        {COURSE_DATA.includes.map((item, index) => (
                             <div key={index} className="include-item">
                                 <Icons.Package />
                                 <span>{item}</span>
@@ -1901,7 +2318,184 @@ ${formData.questions || '[無]'}`;
             );
         }
 
-        // 各個步驟組件
+        // ============================================
+        // Week3Interactive - 工地療癒師轉化器
+        // ============================================
+        function Week3Interactive({ config }) {
+            const [currentStep, setCurrentStep] = useState('intro');
+            const [inputs, setInputs] = useState({ annoyance: '', tool: '' });
+            const [generatedPrompt, setGeneratedPrompt] = useState('');
+            const [copied, setCopied] = useState(false);
+
+            const isInputValid = inputs.annoyance.trim() && inputs.tool.trim();
+
+            const handleGenerate = () => {
+                if (!isInputValid) return;
+                const prompt = config.promptTemplate(inputs.annoyance.trim(), inputs.tool.trim());
+                setGeneratedPrompt(prompt);
+                setCurrentStep('preview');
+            };
+
+            const handleCopy = () => {
+                navigator.clipboard.writeText(generatedPrompt).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2500);
+                });
+            };
+
+            const handleInputChange = (field, value) => {
+                setInputs(prev => ({ ...prev, [field]: value }));
+            };
+
+            const handleBack = () => {
+                setCurrentStep('input');
+                setCopied(false);
+            };
+
+            const handleStartOver = () => {
+                setInputs({ annoyance: '', tool: '' });
+                setGeneratedPrompt('');
+                setCopied(false);
+                setCurrentStep('intro');
+            };
+
+            return (
+                <div className="week3-interactive">
+                    <div className="interactive-header">
+                        <h2>⚡ {config.toolTitle}</h2>
+                        <div className="step-indicator">
+                            {currentStep === 'intro' && 'Step 1/3：認識黃金公式'}
+                            {currentStep === 'input' && 'Step 2/3：輸入你的素材'}
+                            {currentStep === 'preview' && 'Step 3/3：複製提示詞'}
+                        </div>
+                    </div>
+
+                    <div className="interactive-content">
+                        {/* Step 1: 介紹黃金公式 */}
+                        {currentStep === 'intro' && (
+                            <div className="step-content">
+                                <h3>🔥 黃金提示詞公式</h3>
+                                <p>這套公式能把你的工地日常轉化成有共鳴的療癒貼文：</p>
+
+                                <div className="formula-display">
+                                    {config.formulaSteps.map((step, index) => (
+                                        <React.Fragment key={step}>
+                                            <div className="formula-step">
+                                                <span className="formula-name">{step}</span>
+                                                <span className="formula-label">{config.formulaLabels[step]}</span>
+                                            </div>
+                                            {index < config.formulaSteps.length - 1 && (
+                                                <span className="formula-arrow">→</span>
+                                            )}
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+
+                                <div className="key-points">
+                                    <h4>為什麼這個公式有效？</h4>
+                                    <ul>
+                                        <li><strong>Hook</strong>：用感官細節讓讀者身歷其境</li>
+                                        <li><strong>Vulnerability</strong>：承認脆弱建立信任</li>
+                                        <li><strong>Pivot</strong>：展示你的療癒工具</li>
+                                        <li><strong>Insight</strong>：給出可行動的建議</li>
+                                    </ul>
+                                </div>
+
+                                <button className="next-btn" onClick={() => setCurrentStep('input')}>
+                                    開始輸入素材 →
+                                </button>
+                            </div>
+                        )}
+
+                        {/* Step 2: 輸入素材 */}
+                        {currentStep === 'input' && (
+                            <div className="step-content">
+                                <h3>📝 輸入你的素材</h3>
+                                <p>回想今天（或最近）工地裡發生的事，填入以下兩個欄位：</p>
+
+                                <div className="form-group">
+                                    <label>{config.inputLabels.annoyance} <span className="required">*</span></label>
+                                    <textarea
+                                        value={inputs.annoyance}
+                                        onChange={(e) => handleInputChange('annoyance', e.target.value)}
+                                        placeholder={config.placeholders.annoyance}
+                                        rows="3"
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label>{config.inputLabels.tool} <span className="required">*</span></label>
+                                    <textarea
+                                        value={inputs.tool}
+                                        onChange={(e) => handleInputChange('tool', e.target.value)}
+                                        placeholder={config.placeholders.tool}
+                                        rows="2"
+                                    />
+                                </div>
+
+                                <div className="button-group">
+                                    <button
+                                        className="back-btn"
+                                        onClick={() => setCurrentStep('intro')}
+                                    >
+                                        ← 返回
+                                    </button>
+                                    <button
+                                        className="generate-btn"
+                                        onClick={handleGenerate}
+                                        disabled={!isInputValid}
+                                    >
+                                        ✨ 生成黃金提示詞
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Step 3: 預覽並複製 */}
+                        {currentStep === 'preview' && (
+                            <div className="step-content">
+                                <h3>📋 你的專屬提示詞</h3>
+                                <p>複製以下內容，貼到 ChatGPT 即可生成貼文：</p>
+
+                                <div className="prompt-output">
+                                    <pre>{generatedPrompt}</pre>
+                                </div>
+
+                                <button
+                                    className={`copy-btn-large ${copied ? 'copied' : ''}`}
+                                    onClick={handleCopy}
+                                >
+                                    {copied ? 'Copied! ✨' : '📋 複製提示詞'}
+                                </button>
+
+                                <div className="usage-instruction">
+                                    <h4>使用方式：</h4>
+                                    <ol>
+                                        <li>點擊上方按鈕複製提示詞</li>
+                                        <li>打開 ChatGPT 貼上</li>
+                                        <li>按下送出，獲得療癒貼文</li>
+                                        <li>微調後發布到 Threads！</li>
+                                    </ol>
+                                </div>
+
+                                <div className="button-group">
+                                    <button className="back-btn" onClick={handleBack}>
+                                        ← 修改素材
+                                    </button>
+                                    <button className="restart-btn" onClick={handleStartOver}>
+                                        🔄 再做一篇
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        // ============================================
+        // Week 1 各個步驟組件
+        // ============================================
         function IntroStep({ onNext }) {
             return (
                 <div className="step-content">
