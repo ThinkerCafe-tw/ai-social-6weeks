@@ -1535,7 +1535,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState } = React;
+        const { useState, useRef } = React;
 
         // ============================================
         // COURSE_DATA - 集中式資料管理
@@ -1969,11 +1969,30 @@
         }
 
         function WeekSection({ week, title, icon, goal, learns, completes, isActive = false, onExpand }) {
+            const sectionRef = useRef(null);
+
+            const handleExpand = () => {
+                if (!onExpand) return;
+
+                const wasActive = isActive;
+                onExpand();
+
+                // 只在展開時自動捲動（不是收合時）
+                if (!wasActive) {
+                    setTimeout(() => {
+                        sectionRef.current?.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            };
+
             return (
-                <section className={`week-section ${isActive ? 'active' : ''}`}>
-                    <div 
-                        className="week-header" 
-                        onClick={onExpand}
+                <section ref={sectionRef} className={`week-section ${isActive ? 'active' : ''}`}>
+                    <div
+                        className="week-header"
+                        onClick={handleExpand}
                         style={{ cursor: onExpand ? 'pointer' : 'default' }}
                     >
                         {icon}
