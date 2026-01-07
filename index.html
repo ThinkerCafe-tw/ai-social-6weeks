@@ -1772,12 +1772,12 @@
 
 貼文內容：`,
                 placeholders: {
-                    annoyance: "例如：客戶在驗收時突然改了 15 處，說「這不是我要的感覺」",
-                    tool: "例如：聽一首歌 / 喝杯熱茶 / 走到陽台深呼吸"
+                    annoyance: "師傅今天甩工具、板材送錯、工期又delay，電話被客戶追殺三通",
+                    tool: "一杯手沖咖啡，在工地角落慢慢聞香氣"
                 },
                 inputLabels: {
-                    annoyance: "今天的工地鳥事",
-                    tool: "你的療癒法寶"
+                    annoyance: "今天的崩潰瞬間",
+                    tool: "你的轉念法寶"
                 }
             }
         };
@@ -2359,11 +2359,11 @@ ${formData.questions || '[無]'}`;
             const [generatedPrompt, setGeneratedPrompt] = useState('');
             const [copied, setCopied] = useState(false);
 
-            const isInputValid = inputs.annoyance.trim() && inputs.tool.trim();
-
             const handleGenerate = () => {
-                if (!isInputValid) return;
-                const prompt = config.promptTemplate(inputs.annoyance.trim(), inputs.tool.trim());
+                // 如果沒輸入，使用預設範例
+                const annoyance = inputs.annoyance.trim() || config.placeholders.annoyance;
+                const tool = inputs.tool.trim() || config.placeholders.tool;
+                const prompt = config.promptTemplate(annoyance, tool);
                 setGeneratedPrompt(prompt);
                 setCurrentStep('preview');
             };
@@ -2475,7 +2475,6 @@ ${formData.questions || '[無]'}`;
                                     <button
                                         className="generate-btn"
                                         onClick={handleGenerate}
-                                        disabled={!isInputValid}
                                     >
                                         ✨ 生成黃金提示詞
                                     </button>
